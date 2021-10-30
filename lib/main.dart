@@ -14,24 +14,61 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// タイマー作る
 
 class FirstPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('First Page')),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) {
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          SecondPageButton(),
+          // TODO: 引数渡す方法確認
+          // SecondPageButton(dialog: true),
+          TimerPageButton(),
+        ],
+      ),
+    );
+  }
+}
+
+class TimerPageButton extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Center(
+      child: RaisedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
+                return TimerPage();
+              },
+            ),
+          );
+        },
+        child: const Text('Timer Page'),
+      ),
+    );
+  }
+}
+
+class SecondPageButton extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Center(
+      child: RaisedButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) {
                 return SecondPage();
-              }),
-            );
-          },
-          child: const Text('Next Page'),
-        ),
+              },
+              // TODO: 引数でダイアログにするかどうか
+              // fullscreenDialog: true,
+            ),
+          );
+        },
+        child: const Text('Second Page'),
       ),
     );
   }
@@ -41,6 +78,22 @@ class SecondPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Second Page')),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: const Text('Go back'),
+        ),
+      ),
+    );
+  }
+}
+
+class TimerPage extends StatelessWidget {
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Timer Page')),
       body: Center(
         child: RaisedButton(
           onPressed: () {
